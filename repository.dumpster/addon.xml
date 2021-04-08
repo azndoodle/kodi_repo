@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.mystuff" name="Dumpster Repository" version="1.0.0" provider-name="azndoodle">
+<addon id="repository.dumpster" name="Dumpster Repository" version="1.0.0" provider-name="azndoodle">
     <extension point="xbmc.addon.repository" name="Dumpster Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/azndoodle/kodi_repo/master/zips/addons.xml</info>
