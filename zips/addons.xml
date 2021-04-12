@@ -18,7 +18,7 @@
     <platform>all</platform>
     <license>MIT License</license>
     <assets>
-        <icon>icon.png</icon>
+        <icon>icon-icdrama.png</icon>
     </assets>
   </extension>
 </addon>
