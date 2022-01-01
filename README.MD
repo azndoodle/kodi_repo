@@ -1,11 +1,20 @@
 ## Video version of this tutorial now available!
 [How to make a Kodi Repository!](https://youtu.be/EgFtVW0MRrs)
 
+## this readme has been modified for better organization of code and may not match the video link.
+
+# CHANGES - definition and minor changes to the original
+## Structure
+src folder - stores all source codes needed to generate the final artifact (zips)
+zip folder - stores the newly generated artifacts from the src folder
+repo folder - stores repositories to your zips and other additinal repo you want to make available
+
+
 # BASIC - How to setup for hosting on GitHub Pages
 
 In order to follow this tutorial, first fork this repository, and then clone your newly forked copy locally.
 
-First, you'll need to edit the `addon.xml` file within the `/repository.example` folder with your chosen add-on ID, a version number, and your username (or whatever you'd like) for `provider`, as seen on line 2:
+First, you'll need to edit the `addon.xml` file within the `/src/repository.example` folder with your chosen add-on ID, a version number, and your username (or whatever you'd like) for `provider`, as seen on line 2:
 
 ```XML
 <addon id="ADDON_ID_HERE" name="REPO_NAME_HERE" version="VERSION_NUMBER_HERE" provider-name="YOUR_USERNAME_HERE">
@@ -29,6 +38,9 @@ You should also change the summary and description of your repository, as seen o
 While not required, it is also recommended to replace `icon.png` and `fanart.jpg` in the `/repository.example` folder with art relevant to your repository or the add-ons contained within. `icon.png` should be 512x512 px, and `fanart.jpg` should be 1920x1080 px, or a similar ratio.
 
 To build the repository, first rename the `/repository.example` folder to match whatever add-on ID you chose earlier. Place the add-on source folders for whichever add-ons you'd like to be contained in your Kodi repo in the main folder of this repository, and run `_repo_xml_generator.py`. 
+
+TIPS to run python script:
+Windows (CMD) or MAC (Terminal): `python3 <filename>.py`
 
 This will create zips of all of the desired add-ons, and place them in the `zips` folder, along with a generated `addons.xml` and `addons.xml.md5`. Copy the zip file of your repository, located at `/zips/ADDON_ID_HERE/ADDON_ID_HERE-VERSION_NUMBER_HERE.zip`,
 and paste it into the `/repo` folder.
