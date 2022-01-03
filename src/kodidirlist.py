@@ -4,7 +4,7 @@ import os
 
 def print_sizes(root):
     for name in sorted(os.listdir(root)):
-        if name == 'index.html':
+        if os.listdir(root) != None and name.find('.zip') == -1:
             continue
         print '<tr><td><a href="%s">%s</a></td><td>%dB</td></tr>' % (name, name, os.stat(name).st_size)
 

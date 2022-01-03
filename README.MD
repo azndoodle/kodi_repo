@@ -39,9 +39,6 @@ While not required, it is also recommended to replace `icon.png` and `fanart.jpg
 
 To build the repository, first rename the `/repository.example` folder to match whatever add-on ID you chose earlier. Place the add-on source folders for whichever add-ons you'd like to be contained in your Kodi repo in the main folder of this repository, and run `_repo_xml_generator.py`. 
 
-**TIPS** to run python script:
-Windows (CMD) or MAC (Terminal): `python3 <filename>.py`
-
 This will create zips of all of the desired add-ons, and place them in the `zips` folder, along with a generated `addons.xml` and `addons.xml.md5`. Copy the zip file of your repository, located at `/zips/ADDON_ID_HERE/ADDON_ID_HERE-VERSION_NUMBER_HERE.zip`,
 and paste it into the `/repo` folder.
 
@@ -84,5 +81,20 @@ After doing so, your file manager source will be:
 - ***addons.xml.md5***: contains the checksum to addons.xml.  This value is stored in Kodi database. If the MD5 remains the same, Kodi won't query the addons.xml.
 - ***addons.xml***: used by Kodi to infer the contents of the repo or addon.
 
+# ADDITIONAL SCRIPTS
 
+## ```_repo_xml_generator.py``` (python3 script)
+As described above: to generate the zips, xml, md5 files needed for Kodi
+In Windows (CMD) or MAC (Terminal) type: `python3 _repo_xml_generator.py`
+
+## ```./src/kodidirlist.py``` (python2 script)
+To generate html index content listing
+In Windows (CMD) or MAC (Terminal) type: `python3 kodidirlist.py`
+
+## ```./src/mkmd5sum.sh```  (shell script)
+To generate md5 checksum on addons.xml needed for Kodi (to run separately if needed)
+In Windows (CMD) or MAC (Terminal) navigate to the folder to generate listing and type: `python ../../src/kodidirlist.py > index.html`
+
+## ```./src/mkdist.sh``` (shell script)
+??
 
