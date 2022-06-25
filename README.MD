@@ -93,7 +93,7 @@ UPDATE: type: `python3 _repo_xml_generator_v2.py` ~ fixed generated zip as it wa
 
 ## ```./src/kodidirlist.py``` (python2 script)
 To generate html index content listing for your repo
-In Windows (CMD) or MAC (Terminal) navigate to the repo folder and type: `python3 ../src/kodidirlist.py`
+In Windows (CMD) or MAC (Terminal) navigate to the repo folder and type: `python3 ../src/kodidirlist.py > index.html`
 
 ## ```./src/mkmd5sum.sh```  (shell script)
 To generate md5 checksum on addons.xml needed for Kodi (to run separately if this md5 needs updating manually ~ generator auto creates one)
