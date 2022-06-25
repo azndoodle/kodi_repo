@@ -102,3 +102,7 @@ In Windows (CMD) or MAC (Terminal) navigate to the src folder and type: `python3
 ## ```./src/mkdist.sh``` (shell script)
 (??) Not sure what is the need or what it's suppose to do.
 
+
+# Azndhusband ~ ICDRAMA source
+Intial owner was https://github.com/aznhusband/aznhusband.github.io but since Nov 2020 he has gone dark.
+Voluntarily taken over by Soraxas with latest updates https://github.com/soraxas/aznhusband.github.io/releases 
