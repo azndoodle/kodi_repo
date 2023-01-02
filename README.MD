@@ -39,7 +39,7 @@ see below in description of supporting scripts
 Generate the artefacts needed for plugin for Kodi and uses the below scripts to support the process.
 
 #### ```./src/kodidirlist.py``` (python2 script)
-To generate html index content listing for your repo
+To generate html index content listing for your repo, navigate to `repo` folder and run below command.
 In Windows (CMD) or MAC (Terminal) navigate to the repo folder and type: `python3 ../src/kodidirlist.py > index.html`
 
 #### ```./src/mkmd5sum.sh```  (shell script)
