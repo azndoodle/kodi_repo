@@ -1,3 +1,8 @@
+2.3.2 - 2022-12-22
+- updated to use resolveurl 5.1.86
+- add "http:" if streams data URL is missing it
+- see https://github.com/soraxas/aznhusband.github.io/pull/4
+
 2.3.0 - 2021-05-26
  - Compatibility updates for Kodi 19
 

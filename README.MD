@@ -1,16 +1,57 @@
-## Video version of this tutorial now available!
+# Azn Dumpster Repo ~ for personal use in adding to Kodi 19
+This repo initially to host icdrama plugin updates since Azndhusband has gone dark; lately this repo to host other plugins that are not accessible directly from Kodi.
+
+## Source Code
+### Azndhusband ~ ICDRAMA source
+Intial owner was https://github.com/aznhusband/aznhusband.github.io but since Nov 2020 he has gone dark.
+
+### Soraxas ~ ICDRAMA source
+Voluntarily taken over by Soraxas (with other contributors) with latest updates https://github.com/soraxas/aznhusband.github.io/releases 
+
+Going forward matching to Soraxas release version starting with 2.3.1
+
+### Gujal00 Resolverurl
+see https://github.com/Gujal00/ResolveURL and https://github.com/Gujal00/smrzips
+
+
+### Kodi Repo Installation
+See https://azndoodle.github.io/kodi_repo/repo/
+
+### Build Code specific for ICDRAMA
+navigate to `/src` folder and run script using one of the following:
+```sh
+./createRelease.sh
+sh createRelease.sh
+bash createRelease.sh
+```
+
+# Changelog
+### 2023-01-02
+- bump repo version to 1.1.0
+- add Gujal00 resolverurl repo to the list
+- update `index.html` with instructions
+- updated to 2.3.2 from icdrama `/src` from Soraxas release
+
+### prior in 2022
+- creating this repo and bring in previous icdrama 2.2.0
+
+
+
+---
+# Tutorial of Kodi Repo and Plugin Project
+Video version of this tutorial now available!
 [How to make a Kodi Repository!](https://youtu.be/EgFtVW0MRrs)
 
-## this readme has been modified for better organization of code and may not match the video link.
+this readme has been modified for better organization of code and may not match the video link.
 
-# CHANGES - definition and minor changes to the original
-## Structure
+## CHANGES - definition and minor changes to the original
+### Structure
 src folder - stores all source codes needed to generate the final artifact (zips)
 zip folder - stores the newly generated artifacts from the src folder
 repo folder - stores repositories to your zips and other additinal repo you want to make available
 
 
-# BASIC - How to setup for hosting on GitHub Pages
+## BASIC - How to setup for hosting on GitHub Pages
 
 In order to follow this tutorial, first fork this repository, and then clone your newly forked copy locally.
 
@@ -63,7 +104,7 @@ And if you named it something else, it will be:
 
 `https://YOUR_USERNAME_HERE.github.io/REPOSITORY_NAME_HERE/repo/`
 
-# ADVANCED - How to set up for hosting without GitHub Pages
+## ADVANCED - How to set up for hosting without GitHub Pages
 
 If you want to host your Kodi repo on a different host besides GitHub Pages, simply download this repository as a `.zip`, and unzip it , rather than forking and cloning it. Continue to follow the rest of the setup procedure, except for the setting up of GitHub Pages. The only differences will be in your `addon.xml` file (lines 5-7), as it will need to reference yourhost, rather than GitHub:
 
@@ -79,30 +120,29 @@ After doing so, your file manager source will be:
 
 `https://YOUR_HOST_URL_HERE/repo/`
 
-# WHAT'S IMPORTANT TO KODI
+## WHAT'S IMPORTANT TO KODI
 - ***addons.xml.md5***: contains the checksum to addons.xml.  This value is stored in Kodi database. If the MD5 remains the same, Kodi won't query the addons.xml.
 - ***addons.xml***: used by Kodi to infer the contents of the repo or addon.
 
-# ADDITIONAL SCRIPTS
+## ADDITIONAL SCRIPTS
 
-## ```_repo_xml_generator.py``` (python3 script)
+### Building all sources (repo and plugins)
+Steps to build all the necessary files that exist in this code repo.  To only build ICDRAMA see [Build Code specific for ICDRAMA section](#build-code-specific-for-icdrama).
+
+#### ```_repo_xml_generator.py``` (python3 script)
 As described above: to generate the zips, xml, md5 files needed for Kodi
 In Windows (CMD) or MAC (Terminal) type: `python3 _repo_xml_generator.py`
 
 UPDATE: type: `python3 _repo_xml_generator_v2.py` ~ fixed generated zip as it was generating zero size zips.
 
-## ```./src/kodidirlist.py``` (python2 script)
+#### ```./src/kodidirlist.py``` (python2 script)
 To generate html index content listing for your repo
 In Windows (CMD) or MAC (Terminal) navigate to the repo folder and type: `python3 ../src/kodidirlist.py > index.html`
 
-## ```./src/mkmd5sum.sh```  (shell script)
+#### ```./src/mkmd5sum.sh```  (shell script)
 To generate md5 checksum on addons.xml needed for Kodi (to run separately if this md5 needs updating manually ~ generator auto creates one)
 In Windows (CMD) or MAC (Terminal) navigate to the src folder and type: `python3 mkmd5sum.sh`
 
-## ```./src/mkdist.sh``` (shell script)
+#### ```./src/mkdist.sh``` (shell script)
 (??) Not sure what is the need or what it's suppose to do.
 
-
-# Azndhusband ~ ICDRAMA source
-Intial owner was https://github.com/aznhusband/aznhusband.github.io but since Nov 2020 he has gone dark.
-Voluntarily taken over by Soraxas with latest updates https://github.com/soraxas/aznhusband.github.io/releases 
