@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.azn-dumpster-kodi" name="Azn Dumpster Kodi Repository" version="1.1.0" provider-name="azndoodle">
+    <extension point="xbmc.addon.repository" name="Azn Dumpster Kodi Repository">
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/azndoodle/kodi_repo/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/azndoodle/kodi_repo/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/azndoodle/kodi_repo/master/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Azn Dumpster Repository</summary>
+        <description lang="en">To host any addons that is not available in other repo or manually built addons. Logo generated from https://looka.com/s/106220461</description>
+        <disclaimer></disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
