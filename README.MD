@@ -57,6 +57,8 @@ In Windows (CMD) or MAC (Terminal) navigate to the src folder and type: `python3
 - add Gujal00 resolverurl repo to the list
 - update `index.html` with instructions
 - updated to 2.3.2 from icdrama `/src` from Soraxas release
+- add new make_index.py script to generate deep folder structure
+- add resolveurl-5.1.86.zip to repo
 
 ### prior in 2022
 - creating this repo and bring in previous icdrama 2.2.0
@@ -160,11 +162,22 @@ After doing so, your file manager source will be:
 
 `https://YOUR_HOST_URL_HERE/repo/`
 
+
 ## WHAT'S IMPORTANT TO KODI
 - ***addons.xml.md5***: contains the checksum to addons.xml.  This value is stored in Kodi database. If the MD5 remains the same, Kodi won't query the addons.xml.
 - ***addons.xml***: used by Kodi to infer the contents of the repo or addon.
+- ***index.html***: this file is needed when listing files/folders for file manager to navigate and download files.
 
+---
+# Additional Scripts
+## ``` ./src/make_index.py ``` (python script)
+This script create `index.html` (enhances and replaces `kodidirlist.py`) to scan the specified folder and sub-folders to create index file for each level so each Kodi file manager can navigate through folder structure.
 
+To run navigate to `/src` folder and run `python3 make_index.py ../repo`.
+
+This was forked from https://github.com/teopost/kodi-repo/blob/master/bin/make_index.py
+
+PRE-REQUISITE: needs Mako Template Library. to Install for python, run `pip install mako`
 
 
 
