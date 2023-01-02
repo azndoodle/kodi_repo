@@ -4,6 +4,14 @@ This repo initially to host icdrama plugin updates since Azndhusband has gone da
 ## Source Code
 ### Azndhusband ~ ICDRAMA source
 Intial owner was https://github.com/aznhusband/aznhusband.github.io but since Nov 2020 he has gone dark.
+#### ICDRAMA Files
+```
+  |- /src/plugin.video.icdrama/*
+  |- /src/createRelease.sh
+  |- /src/kodidirlist.py
+  |- /src/mkdist.sh
+  |- /src/mkmd5sum.sh
+```
 
 ### Soraxas ~ ICDRAMA source
 Voluntarily taken over by Soraxas (with other contributors) with latest updates https://github.com/soraxas/aznhusband.github.io/releases 
@@ -24,6 +32,23 @@ navigate to `/src` folder and run script using one of the following:
 sh createRelease.sh
 bash createRelease.sh
 ```
+see below in description of supporting scripts
+
+### Script Breakdown
+#### ```./src/createRelease.py``` (python2 script)
+Generate the artefacts needed for plugin for Kodi and uses the below scripts to support the process.
+
+#### ```./src/kodidirlist.py``` (python2 script)
+To generate html index content listing for your repo
+In Windows (CMD) or MAC (Terminal) navigate to the repo folder and type: `python3 ../src/kodidirlist.py > index.html`
+
+#### ```./src/mkmd5sum.sh```  (shell script)
+To generate md5 checksum on addons.xml needed for Kodi (to run separately if this md5 needs updating manually ~ generator auto creates one)
+In Windows (CMD) or MAC (Terminal) navigate to the src folder and type: `python3 mkmd5sum.sh`
+
+#### ```./src/mkdist.sh``` (shell script)
+(??) Not sure what is the need or what it's suppose to do.
+
 
 # Changelog
 ### 2023-01-02
@@ -45,10 +70,20 @@ Video version of this tutorial now available!
 this readme has been modified for better organization of code and may not match the video link.
 
 ## CHANGES - definition and minor changes to the original
-### Structure
-src folder - stores all source codes needed to generate the final artifact (zips)
-zip folder - stores the newly generated artifacts from the src folder
-repo folder - stores repositories to your zips and other additinal repo you want to make available
+
+### Original Tutorial Files
+```
+  |- /repo/index.html 
+  |- /src/repository.example
+  |- /_repo_xml_generator.py
+  |- /README.MD
+```
+
+### Folder Structure
+`src` folder - stores all source codes needed to generate the final artifact (zips)
+`zip` folder - (generated) stores the newly generated artifacts from the src folder (once repo is installed, this is where it will fetch the plugins)
+`repo` folder - (generated) stores repositories to your zips and other additinal repo you want to make available (Kodi will look here in file manager for repo/zips to install)
+
 
 
 ## BASIC - How to setup for hosting on GitHub Pages
@@ -80,7 +115,11 @@ While not required, it is also recommended to replace `icon.png` and `fanart.jpg
 
 To build the repository, first rename the `/repository.example` folder to match whatever add-on ID you chose earlier. Place the add-on source folders for whichever add-ons you'd like to be contained in your Kodi repo in the main folder of this repository, and run `_repo_xml_generator.py`. 
 
-UPDATE: use _repo_xml_generator_v2.py ~ fixed generated zip as it was generating zero size zips.
+In Windows (CMD) or MAC (Terminal) type: `python3 _repo_xml_generator.py`
+
+UPDATE 1: moved `/repository.example` to `/src/repository.example`.
+UPDATE 2: type, `python3 _repo_xml_generator_v2.py` ~ fixed generated zip as it was generating zero size zips.
+
 
 This will create zips of all of the desired add-ons, and place them in the `zips` folder, along with a generated `addons.xml` and `addons.xml.md5`. Copy the zip file of your repository, located at `/zips/ADDON_ID_HERE/ADDON_ID_HERE-VERSION_NUMBER_HERE.zip`,
 and paste it into the `/repo` folder.
@@ -124,25 +163,7 @@ After doing so, your file manager source will be:
 - ***addons.xml.md5***: contains the checksum to addons.xml.  This value is stored in Kodi database. If the MD5 remains the same, Kodi won't query the addons.xml.
 - ***addons.xml***: used by Kodi to infer the contents of the repo or addon.
 
-## ADDITIONAL SCRIPTS
 
-### Building all sources (repo and plugins)
-Steps to build all the necessary files that exist in this code repo.  To only build ICDRAMA see [Build Code specific for ICDRAMA section](#build-code-specific-for-icdrama).
 
-#### ```_repo_xml_generator.py``` (python3 script)
-As described above: to generate the zips, xml, md5 files needed for Kodi
-In Windows (CMD) or MAC (Terminal) type: `python3 _repo_xml_generator.py`
 
-UPDATE: type: `python3 _repo_xml_generator_v2.py` ~ fixed generated zip as it was generating zero size zips.
-
-#### ```./src/kodidirlist.py``` (python2 script)
-To generate html index content listing for your repo
-In Windows (CMD) or MAC (Terminal) navigate to the repo folder and type: `python3 ../src/kodidirlist.py > index.html`
-
-#### ```./src/mkmd5sum.sh```  (shell script)
-To generate md5 checksum on addons.xml needed for Kodi (to run separately if this md5 needs updating manually ~ generator auto creates one)
-In Windows (CMD) or MAC (Terminal) navigate to the src folder and type: `python3 mkmd5sum.sh`
-
-#### ```./src/mkdist.sh``` (shell script)
-(??) Not sure what is the need or what it's suppose to do.
 
