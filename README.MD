@@ -41,6 +41,7 @@ Generate the artefacts needed for plugin for Kodi and uses the below scripts to 
 #### ```./src/kodidirlist.py``` (python2 script)
 To generate html index content listing for your repo, navigate to `repo` folder and run below command.
 In Windows (CMD) or MAC (Terminal) navigate to the repo folder and type: `python3 ../src/kodidirlist.py > index.html`
+(You will want to run this on it's own after running the `_repo_xml_generator_v2.py`)
 
 #### ```./src/mkmd5sum.sh```  (shell script)
 To generate md5 checksum on addons.xml needed for Kodi (to run separately if this md5 needs updating manually ~ generator auto creates one)
