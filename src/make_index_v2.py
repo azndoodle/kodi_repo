@@ -15,7 +15,7 @@ import os
 import argparse
 
 INDEX_TEMPLATE = r"""
-
+<!DOCTYPE html>
 <html>
     <head>
         <title>Index of ${header}</title>
