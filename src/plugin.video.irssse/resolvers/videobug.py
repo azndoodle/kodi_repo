@@ -1,17 +1,16 @@
 import re
 import json
-from urllib.parse import unquote
-from urllib.parse import urlparse
+from urllib import unquote
+from urlparse import urlparse
 import base64
 import requests
 from bs4 import BeautifulSoup
-import resolveurl
-from resolveurl import common
-from resolveurl.resolver import ResolveUrl, ResolverError
-from resolveurl.lib import jsunpack, helpers
-from .. import common as cmn
+import urlresolver
+from urlresolver import common
+from urlresolver.resolver import UrlResolver, ResolverError
+from urlresolver.plugin.lib import jsunpack, helpers
 
-class Videobug(ResolveUrl):
+class Videobug(UrlResolver):
     name = 'Videobug'
     domains = [ 'videobug.se', 'vlist.se']
     pattern = '(?://|\.)(videobug\.se|vlist\.se)/(.+)'
@@ -28,21 +27,15 @@ class Videobug(ResolveUrl):
 
         response = requests.get(url, headers=headers)
 
-        unwrapped_url = ''
-        if 'videoredirect.php?' in url: #for current Openload source & other possible redirects
-            unwrapped_url = response.url
-        else:
-            streams = self._extract_streams(response)
-            unwrapped_url = helpers.pick_source(streams, auto_pick=False)
+        streams = self._extract_streams(response)
+        unwrapped_url = helpers.pick_source(streams, auto_pick=False)
 
-        unwrapped_url = unwrapped_url.decode("utf-8")
         if ('redirector.googlevideo.com' in unwrapped_url or
-            'blogspot.com' in unwrapped_url or
-            'fbcdn.net' in unwrapped_url): #for current Videobug source
+            'blogspot.com' in unwrapped_url):
             # Kodi can play directly, skip further resolve
             return unwrapped_url
 
-        return resolveurl.resolve(unwrapped_url)
+        return urlresolver.resolve(unwrapped_url)
 
 
     def get_url(self, host, media_id):
@@ -70,7 +63,7 @@ class Videobug(ResolveUrl):
             streams = method(response)
             if streams:
                 return streams
-        raise ResolverError('Videobug resolver: no streams found in ' + response.url)
+        raise ResolverError('Videobug resolver: no streams found in ' + url)
 
     def __method6(self, response):
         streams = []
@@ -78,7 +71,7 @@ class Videobug(ResolveUrl):
         if response.status_code != 200:
             return streams
 
-        html = response.content.decode("utf-8")
+        html = response.content
         base_url = self._get_base_url(response.url)
         post_url = self._get_post_url(html, base_url)
         data = self._get_post_data(html, base_url)
@@ -108,18 +101,9 @@ class Videobug(ResolveUrl):
         return None
 
     def _get_post_data(self, html, base_url):
-        results = re.findall(r'<script>.*?VB_TOKEN.*?=.*?"(.+?)";.*?VB_ID.*?=.*?"(.+?)";.*?<\/script>', html)
+        results = re.findall(r'<script.+src="(.+\.vbjs\.html)".+decodeURIComponent\("(.+?)"\).+?R\[.+?\]\}\}\(''(.+?)''\).+(<\/script>|\/>)', html)
+
         if results:
-            try:
-                return  {
-                    'VB_ID': results[0][1],
-                    'VB_TOKEN': results[0][0],
-                    'VB_NAME': ''
-                }
-            except Exception as e:
-                cmn.error("Icdrama: " + str(e))
-        else:
-            results = re.findall(r'<script.+src="(.+\.vbjs\.html)".+decodeURIComponent\("(.+?)"\).+?R\[.+?\]\}\}\(''(.+?)''\).+(<\/script>|\/>)', html)
             try:
                 key = results[0][2]
                 key = key.replace("'", "")
@@ -138,7 +122,8 @@ class Videobug(ResolveUrl):
                     'VB_NAME': ''
                 }
             except Exception as e:
-                cmn.error("Icdrama: " + str(e))
+                import xbmc
+                xbmc.log(str(e), xbmc.LOGERROR)
 
         return None
 
@@ -175,8 +160,8 @@ class Videobug(ResolveUrl):
         streams = []
         # Grab the HTML
         if response.status_code == 200:
-            html = response.content.decode("utf-8")
-            url  = response.url.decode("utf-8")
+            html = response.content
+            url  = response.url
         else:
             # error, bail.
             return streams
@@ -249,7 +234,7 @@ class Videobug(ResolveUrl):
         ''' Allupload
             http://videobug.se/vid-a/g2S5k34-MoC2293iUaa9Hw
         '''
-        html = response.content.decode("utf-8")
+        html = response.content
         streams = []
         df = re.search(r"dF\(\\?'(.*)\\?'\)", html)
         if df:
@@ -279,7 +264,7 @@ class Videobug(ResolveUrl):
         ''' Picasaweb, Videobug
             http://videobug.se/video/Wz3_oCoEYozRSbJFQo4fkjmuvR6LpsFHM-XZy...
         '''
-        html = response.content.decode("utf-8")
+        html = response.content
         streams = []
         soup = BeautifulSoup(html, 'html5lib')
         player_func = re.compile(r'(player_[^\(]+)\(\);').match
@@ -291,7 +276,7 @@ class Videobug(ResolveUrl):
             re_flash = re.compile(r"video *= *{[^:]+: *'(.*?)' *}")
             re_html5 = re.compile(r'<source.*?src=\"(.*?)\"')
             urls = [(re_flash.findall(fb) or re_html5.findall(fb))[0] for fb in func_bodies]
-            streams = list(zip(labels, urls))
+            streams = zip(labels, urls)
         except Exception:
             pass
         return streams
@@ -300,7 +285,7 @@ class Videobug(ResolveUrl):
     def __method4(self, response):
         ''' http://videobug.se/vid-al/XNkjCT5pBx1YlndruYWdWg?&caption=-sgCv7...
         '''
-        html = response.content.decode("utf-8")
+        html = response.content
         streams = []
         vids = re.findall(r'''{ *file *: *strdecode\('(.+?)'\).*?label *: *"(.*?)"''', html)
         for cryptic_url, label in vids:
@@ -312,7 +297,7 @@ class Videobug(ResolveUrl):
     def __method5(self, response):
         ''' http://videobug.se/vid/pVobcNozEWmTkarNnwX06w
         '''
-        html = response.content.decode("utf-8")
+        html = response.content
         streams = []
         if jsunpack.detect(html):
             streams = self._extract_streams(jsunpack.unpack(html))
